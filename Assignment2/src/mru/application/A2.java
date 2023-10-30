@@ -1,6 +1,8 @@
 package mru.application;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /** 
@@ -25,20 +27,39 @@ public class A2 {
 	private int totalwordcount = 0;
 	private Scanner input = new Scanner(System.in);
 	
-//	private SLL<Avenger> mentionList = new SLL<Avenger>();
-//	private SLL<Avenger> alphabticalList = new SLL<Avenger>();
-//	private SLL<Avenger> mostPopularAvenger = new SLL<Avenger>(new AvengerComparatorFreqDesc());
-//	private SLL<Avenger> mostPopularPerformer = new SLL<Avenger>(new AvengerPerformerComparatorFreqDesc());
+	private SinglyLinkedList<Avenger> mentionList = new SinglyLinkedList<Avenger>();
+	private SinglyLinkedList<Avenger> alphabticalList = new SinglyLinkedList<Avenger>();
+	private SinglyLinkedList<Avenger> mostPopularAvenger = new SinglyLinkedList<Avenger>(new AvengerComparator());
+	private SinglyLinkedList<Avenger> mostPopularPerformer = new SinglyLinkedList<Avenger>(new PerformerComparator());
 	
-	public static void main(String[] args) {
+	//change this xd
+	String FILE_PATH = "C:\\Users\\mozes\\eclipse-workspace\\A2Beater\\src\\res\\input1.txt";
+	
+	public static void main(String[] args) throws FileNotFoundException {
 		A2 a1 = new A2();
 		a1.run();
 	}
 
-	public void run() {
-		readInput();
+	public void run() throws FileNotFoundException {
+//		readInput();
+		loadTXT(FILE_PATH);
 		createdOrderedLists();
 		printResults();
+	}
+
+	//made for testing purposes
+	private void loadTXT(String FILE_PATH) throws FileNotFoundException {
+		Scanner input = new Scanner(new File(FILE_PATH));
+		
+		while (input.hasNext()) {
+
+			String word = cleanWord(input.next());
+
+			if (word.length() > 0) {
+				totalwordcount++;
+				updateAvengerList(word);
+			}
+		}
 	}
 
 	private void createdOrderedLists() {
@@ -50,6 +71,17 @@ public class A2 {
 		//       (The better solution is to create an iterator, but we haven't learned about them, 
 		// 		  will talk about iterators later.)
 		*/ 
+		Node<Avenger> current = mentionList.getFirst();
+		while(current != null) {
+			Avenger a = current.getData();
+			
+			alphabticalList.addToStart(a);
+			mostPopularAvenger.addToStart(a);
+			mostPopularPerformer.addToStart(a);
+			
+			current = current.getNext();
+			
+		}
 	}
 
 	/**
@@ -72,11 +104,66 @@ public class A2 {
 			String word = cleanWord(input.next());
 
 			if (word.length() > 0) {
-				// TODO:
+				
+				totalwordcount++;
+				updateAvengerList(word);
 			}
 		}
 	}
 	
+	//takes the cleaned up word and searches the input to see if the word matches anything inside the mentionList
+	private void updateAvengerList(String word) {
+		
+		for(int i = 0; i < avengerRoster.length; i++) {
+			if(word.equals(avengerRoster[i][0]) || word.equals(avengerRoster[i][1]) || word.equals(avengerRoster[i][2])) {
+				Avenger a = findAvengerInMentionList(word);
+				
+				if(a != null) {
+					if (word.equals(avengerRoster[i][0])) 
+						a.setNameFreq(a.getNameFreq() + 1);
+					else if (word.equals(avengerRoster[i][1])) 
+						a.setAliasFreq(a.getAliasFreq() + 1);   
+					else if (word.equals(avengerRoster[i][2]))
+			            a.setPerformerFreq(a.getPerformerFreq() + 1); 
+				} else {
+					a = new Avenger();
+					
+                    a.setHeroAlias(avengerRoster[i][0]);
+                    a.setHeroName(avengerRoster[i][1]);
+                    a.setPerformer(avengerRoster[i][2]);
+                    
+                    if (word.equals(avengerRoster[i][0])) 
+                    	a.setAliasFreq(1);
+                    else if (word.equals(avengerRoster[i][1])) 
+                    	a.setNameFreq(1);
+                    else if (word.equals(avengerRoster[i][2])) 
+                    	a.setPerformerFreq(1);
+                    
+                    mentionList.addToStart(a);
+				}			
+			}
+		}
+	}
+
+	//checking through the mentionList if the parameter matches and if it doesn't return null for the loop above
+	private Avenger findAvengerInMentionList(String a) {
+		Node<Avenger> current = mentionList.getFirst();
+		
+		while(current != null) {
+			Avenger foundA = current.getData();
+			
+	        if (foundA.getHeroAlias().equalsIgnoreCase(a) || foundA.getHeroName().equalsIgnoreCase(a) || foundA.getPerformer().equalsIgnoreCase(a)) {
+	                return foundA;
+	            }
+
+	            current = current.getNext();
+	        }
+		return null;
+		}
+
+
+
+
 	private String cleanWord(String next) {
 		// First, if there is an apostrophe, the substring
 		// before the apostrophe is used and the rest is ignored.
@@ -90,38 +177,62 @@ public class A2 {
 			ret = next.toLowerCase().trim().replaceAll("[^a-z]", "");
 		return ret;
 	}
-	
 
 	/**
 	 * print the results
 	 */
 	private void printResults() {
 		System.out.println("Total number of words: " + totalwordcount);
-		//System.out.println("Number of Avengers Mentioned: " + ??);
+		System.out.println("Number of Avengers Mentioned: " + mentionList.size());
 		System.out.println();
 
 		System.out.println("All avengers in the order they appeared in the input stream:");
 		// Todo: Print the list of avengers in the order they appeared in the input
 		// Make sure you follow the formatting example in the sample output
+		printList(mentionList);
 
 		System.out.println();
 		
 		System.out.println("Top " + topN + " most popular avengers:");
 		// Todo: Print the most popular avengers, see the instructions for tie breaking
 		// Make sure you follow the formatting example in the sample output
+		printTopN(mostPopularAvenger);
 		
 		System.out.println();
 
 		System.out.println("Top " + topN + " most popular performers:");
 		// Todo: Print the most popular performers, see the instructions for tie breaking
 		// Make sure you follow the formatting example in the sample output
+		printTopN(mostPopularPerformer);
 		
 		System.out.println();
 
 		System.out.println("All mentioned avengers in alphabetical order:");
 		// Todo: Print the list of avengers in alphabetical order
+		printList(alphabticalList);
 		
 		System.out.println();
+	}
+
+	//made for redundant prints
+	private void printList(SinglyLinkedList<Avenger> list) {
+		Node<Avenger> current = list.getFirst();
+		while(current != null) {
+			System.out.println(current.getData());
+			current = current.getNext();
+		}
+	}
+	
+	//made for redundant prints
+	private void printTopN(SinglyLinkedList<Avenger> list) {
+		Node<Avenger> current = list.getFirst();
+		int count = 0;
+		
+		while(current != null && count < topN) {
+			System.out.println(current.getData());
+			current = current.getNext();
+			count++;
+		}
 	}
 }
 

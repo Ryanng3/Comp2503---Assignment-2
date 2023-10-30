@@ -1,23 +1,33 @@
 package mru.application;
 
-public class SinglyLinkedList<type>
-{
-    private Node<type> start;
+import java.util.Comparator;
 
-    public SinglyLinkedList() { start = null; }
+public class SinglyLinkedList<T>
+{
+    private Node<T> start;
+    private Comparator<T> comparator;
+
+    public SinglyLinkedList() { 
+    	this.start = null;
+    }
+    
+    public SinglyLinkedList(Comparator<T> comparator) {
+    	this();
+    	this.comparator = comparator;
+    }
     
     public boolean isEmpty(){ return (start == null); }
 
     
-    public void addAt (int index, type data){        	
+    public void addAt (int index, T data){        	
     	int length = size();        
     	if (length == 0 || index <= 0)
     		addToStart(data);
     	else if (length <= index)
     		addToEnd (data);
     	else {
-    		Node<type> nodeToAdd = new Node<>(data);
-    		Node<type> curr = start;                
+    		Node<T> nodeToAdd = new Node<>(data);
+    		Node<T> curr = start;                
     		for (int count = 0; count < index - 1; count++)                			
     			curr = curr.getNext();            
     		nodeToAdd.setNext (curr.getNext());            				
@@ -25,11 +35,13 @@ public class SinglyLinkedList<type>
     	}
     }
 
-    
+    public Node<T> getFirst(){
+    	return start;
+    }
 
-    public type removeFromStart()
+    public T removeFromStart()
     {
-        type data = null;
+        T data = null;
 
         if(start != null)
         {
@@ -40,7 +52,7 @@ public class SinglyLinkedList<type>
             }
             else
             {
-                Node<type> tmp = start;
+                Node<T> tmp = start;
                 data = start.getData();
                 start = start.getNext();
 
@@ -51,13 +63,13 @@ public class SinglyLinkedList<type>
         return data;
     }
     
-    public type removeFromEnd()
+    public T removeFromEnd()
     {
         if (start == null) {
         	return null;
         }
         
-    	type data = null;
+    	T data = null;
     	
     	if (size() == 1) {
     		data = start.getData();
@@ -65,8 +77,8 @@ public class SinglyLinkedList<type>
         	return data;
         }
 
-        Node<type> curr = start;
-        Node<type> prev = start;
+        Node<T> curr = start;
+        Node<T> prev = start;
        
         while (curr.getNext() != null) 
         {
@@ -78,10 +90,10 @@ public class SinglyLinkedList<type>
         return data;
     }
     
-    public type get(int index){
-        type data = null;
+    public T get(int index){
+        T data = null;
         int length = size();
-        Node<type> curr = start;
+        Node<T> curr = start;
         
         if (index <= length && index >=0){
             curr = start;
@@ -96,7 +108,7 @@ public class SinglyLinkedList<type>
     
     
     public int size(){
-        Node<type> curr = start;
+        Node<T> curr = start;
         int length = 0;
 
         while(curr != null)
@@ -108,13 +120,13 @@ public class SinglyLinkedList<type>
         return length;
     }
     
-    public void addToEnd(type data) {
+    public void addToEnd(T data) {
         //without the if and else you will get a null pointer 
         //expection when adding the first element.
         
-        Node<type> nodeToAdd = new Node<>(data); 
+        Node<T> nodeToAdd = new Node<>(data); 
         if(start != null){
-            Node<type> curr = start;
+            Node<T> curr = start;
 
             while(curr.getNext() != null){
                curr = curr.getNext();
@@ -126,9 +138,9 @@ public class SinglyLinkedList<type>
     }
     
     
-    public void addToStart(type data) 
+    public void addToStart(T data) 
     { 
-        Node<type> nodeToAdd = new Node<>(data); 
+        Node<T> nodeToAdd = new Node<>(data); 
         if(isEmpty())
             start = nodeToAdd;
         else
@@ -140,7 +152,7 @@ public class SinglyLinkedList<type>
     
     public void print()
     {
-        Node<type> curr = start;
+        Node<T> curr = start;
 
         System.out.print("Start->");
 
