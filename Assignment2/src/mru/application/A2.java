@@ -51,7 +51,7 @@ public class A2 {
 	 * made for easier testing purposes, functions the same as readInput just takes file path for faster tests
 	 * @param FILE_PATH
 	 * @throws FileNotFoundException
-	 */
+	 */ 
 	private void loadTXT(String FILE_PATH) throws FileNotFoundException {
 		Scanner input = new Scanner(new File(FILE_PATH));
 		
