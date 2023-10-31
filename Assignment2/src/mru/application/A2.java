@@ -47,7 +47,11 @@ public class A2 {
 		printResults();
 	}
 
-	//made for testing purposes
+	/**
+	 * made for easier testing purposes, functions the same as readInput just takes file path for faster tests
+	 * @param FILE_PATH
+	 * @throws FileNotFoundException
+	 */
 	private void loadTXT(String FILE_PATH) throws FileNotFoundException {
 		Scanner input = new Scanner(new File(FILE_PATH));
 		
@@ -62,6 +66,9 @@ public class A2 {
 		}
 	}
 
+	/**
+	 * creates a searcher within the mentionList to then add to the other lists
+	 */
 	private void createdOrderedLists() {
 		// TODO: 
 		/* Create a mover and traverse through the mentionList.
@@ -111,7 +118,11 @@ public class A2 {
 		}
 	}
 	
-	//takes the cleaned up word and searches the input to see if the word matches anything inside the mentionList
+	/**
+	 * takes the cleaned word and searches the list to either create a 
+	 * new object or increase an existing frequency
+	 * @param word
+	 */
 	private void updateAvengerList(String word) {
 		
 		for(int i = 0; i < avengerRoster.length; i++) {
@@ -145,7 +156,11 @@ public class A2 {
 		}
 	}
 
-	//checking through the mentionList if the parameter matches and if it doesn't return null for the loop above
+	/**
+	 * runs through the mentionList to check if the parameter matches
+	 * @param word
+	 * @return word from array otherwise null if it doesn't exist
+	 */
 	private Avenger findAvengerInMentionList(String a) {
 		Node<Avenger> current = mentionList.getFirst();
 		
@@ -214,7 +229,11 @@ public class A2 {
 		System.out.println();
 	}
 
-	//made for redundant prints
+	/**
+	 * prints the the results depending on the given list
+	 * made for repetitive coding
+	 * @param SinglyLinkedList
+	 */
 	private void printList(SinglyLinkedList<Avenger> list) {
 		Node<Avenger> current = list.getFirst();
 		while(current != null) {
@@ -223,7 +242,11 @@ public class A2 {
 		}
 	}
 	
-	//made for redundant prints
+	/**
+	 * prints the the results depending on the given list
+	 * made for repetitive coding
+	 * @param SinglyLinkedList
+	 */
 	private void printTopN(SinglyLinkedList<Avenger> list) {
 		Node<Avenger> current = list.getFirst();
 		int count = 0;
