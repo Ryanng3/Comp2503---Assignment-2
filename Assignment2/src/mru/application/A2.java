@@ -120,9 +120,9 @@ public class A2 {
 				
 				if(a != null) {
 					if (word.equals(avengerRoster[i][0])) 
-						a.setNameFreq(a.getNameFreq() + 1);
+						a.setAliasFreq(a.getAliasFreq() + 1);
 					else if (word.equals(avengerRoster[i][1])) 
-						a.setAliasFreq(a.getAliasFreq() + 1);   
+						a.setNameFreq(a.getNameFreq() + 1);   
 					else if (word.equals(avengerRoster[i][2]))
 			            a.setPerformerFreq(a.getPerformerFreq() + 1); 
 				} else {
@@ -139,7 +139,7 @@ public class A2 {
                     else if (word.equals(avengerRoster[i][2])) 
                     	a.setPerformerFreq(1);
                     
-                    mentionList.addToStart(a);
+                    mentionList.addToEnd(a);
 				}			
 			}
 		}
