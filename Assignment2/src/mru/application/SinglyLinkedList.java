@@ -3,6 +3,7 @@ package mru.application;
 import java.util.Comparator;
 
 public class SinglyLinkedList<T>
+
 {
     private Node<T> start;
     private Comparator<T> comparator;
@@ -19,22 +20,6 @@ public class SinglyLinkedList<T>
     public boolean isEmpty(){ return (start == null); }
 
     
-    public void addAt (int index, T data){        	
-    	int length = size();        
-    	if (length == 0 || index <= 0)
-    		addToStart(data);
-    	else if (length <= index)
-    		addToEnd (data);
-    	else {
-    		Node<T> nodeToAdd = new Node<>(data);
-    		Node<T> curr = start;                
-    		for (int count = 0; count < index - 1; count++)                			
-    			curr = curr.getNext();            
-    		nodeToAdd.setNext (curr.getNext());            				
-    		curr.setNext(nodeToAdd);
-    	}
-    }
-
     public Node<T> getFirst(){
     	return start;
     }
@@ -62,50 +47,6 @@ public class SinglyLinkedList<T>
         }
         return data;
     }
-    
-    public T removeFromEnd()
-    {
-        if (start == null) {
-        	return null;
-        }
-        
-    	T data = null;
-    	
-    	if (size() == 1) {
-    		data = start.getData();
-        	start = null;
-        	return data;
-        }
-
-        Node<T> curr = start;
-        Node<T> prev = start;
-       
-        while (curr.getNext() != null) 
-        {
-        	prev = curr;
-        	curr = curr.getNext();
-        }
-        data = curr.getData();
-        prev.setNext(null);
-        return data;
-    }
-    
-    public T get(int index){
-        T data = null;
-        int length = size();
-        Node<T> curr = start;
-        
-        if (index <= length && index >=0){
-            curr = start;
-            for (int count = 0; count < index; count++)
-                curr = curr.getNext();
-            data = curr.getData();    
-        }
-        return data;
-    }
-    
-
-    
     
     public int size(){
         Node<T> curr = start;
@@ -150,20 +91,6 @@ public class SinglyLinkedList<T>
         }
     }
     
-    public void print()
-    {
-        Node<T> curr = start;
-
-        System.out.print("Start->");
-
-        while(curr != null)
-        {
-            System.out.print("["+curr.getData()+"]->");
-            curr = curr.getNext();
-        }
-
-        System.out.println("null");
-    }
 
 }
 

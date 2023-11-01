@@ -3,6 +3,7 @@ package mru.application;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /** 
@@ -29,8 +30,8 @@ public class A2 {
 	
 	private SinglyLinkedList<Avenger> mentionList = new SinglyLinkedList<Avenger>();
 	private SinglyLinkedList<Avenger> alphabticalList = new SinglyLinkedList<Avenger>();
-	private SinglyLinkedList<Avenger> mostPopularAvenger = new SinglyLinkedList<Avenger>(new AvengerComparator());
-	private SinglyLinkedList<Avenger> mostPopularPerformer = new SinglyLinkedList<Avenger>(new PerformerComparator());
+	private SinglyLinkedList<Avenger> mostPopularAvenger = new SinglyLinkedList<Avenger>();
+	private SinglyLinkedList<Avenger> mostPopularPerformer = new SinglyLinkedList<Avenger>();
 	
 	//change this xd
 	String FILE_PATH = "C:\\Users\\mozes\\eclipse-workspace\\A2Beater\\src\\res\\input1.txt";
@@ -81,10 +82,12 @@ public class A2 {
 		Node<Avenger> current = mentionList.getFirst();
 		while(current != null) {
 			Avenger a = current.getData();
-			
-			alphabticalList.addToStart(a);
-			mostPopularAvenger.addToStart(a);
-			mostPopularPerformer.addToStart(a);
+			Comparator<Avenger> alphabeticalOrder = Comparator.naturalOrder();
+			Comparator<Avenger> popularAvengerOrder = new AvengerComparator();
+			Comparator<Avenger> popularPerformerOrder = new PerformerComparator();
+//			alphabticalList.addToEnd(a, alphabeticalOrder);
+//			mostPopularAvenger.addToEnd(a, popularAvengerOrder);
+//			mostPopularPerformer.addToEnd(a, popularPerformerOrder);
 			
 			current = current.getNext();
 			
