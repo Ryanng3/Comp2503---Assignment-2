@@ -1,6 +1,6 @@
 package mru.application;
 
-public class Node <type>{
+public class Node < type extends Comparable <type> >{
 	private type data;
 	private Node<type> next = null;
 	

@@ -2,7 +2,7 @@ package mru.application;
 
 import java.util.Comparator;
 
-public class SinglyLinkedList<T>
+public class SinglyLinkedList< T extends Comparable <T> >
 
 {
     private Node<T> start;
@@ -91,6 +91,25 @@ public class SinglyLinkedList<T>
         }
     }
     
+    private void addInOrder(T data, Comparator<T> comparator) {
+        Node<T> newNode = new Node<>(data);
 
+        if (start == null || comparator.compare(data, start.getData()) < 0){
+            addToStart(data);
+        } else {
+            Node<T> current = start;
+            while (current.getNext() != null && comparator.compare(data, current.getNext().getData()) >= 0) {
+                current = current.getNext();
+            }
+            if(current.getNext() == null){
+                addToEnd(data);
+            }else{
+                newNode.setNext(current.getNext());
+                current.setNext(newNode);
+            }
+      
+        }
+    }
+    
 }
 
