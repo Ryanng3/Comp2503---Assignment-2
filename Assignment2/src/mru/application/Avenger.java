@@ -159,6 +159,17 @@ public class Avenger implements Comparable<Avenger> {
 		return result;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		if (o == null)
+			return false;
+		Avenger a = (Avenger) o;
+		if (this.getHeroAlias().equals(a.getHeroAlias()))
+			return true;
+		else 
+			return false;
+	}
+	
 	/**
 	 * This method created a formatted string representation of avengers
 	 * @return format the hero's alias, name, performer and frequency
