@@ -159,6 +159,12 @@ public class Avenger implements Comparable<Avenger> {
 		return result;
 	}
 	
+	/**
+	 * Compares the avenger object with another object for equality 
+	 * @param o the other object to compare with this avenger 
+	 * @return true if the other object is an avenger with the same heroAlias
+	 * returns false otherwise or if the object is null 
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (o == null)
