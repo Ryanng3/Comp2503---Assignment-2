@@ -2,28 +2,53 @@ package mru.application;
 
 import java.util.Comparator;
 
+/**
+ * a singly linked list with generic elements 
+ *
+ * @param <T> the type of elements in the last 
+ */
 public class SinglyLinkedList< T extends Comparable <T> >
 
 {
     private Node<T> start;
     private Comparator<T> comparator;
 
+    /**
+     * creates an empty singly linked list 
+     */
     public SinglyLinkedList() { 
     	this.start = null;
     }
     
+    /**
+     * creates an empty singly linked list with a custom comparator 
+     * @param comparator the comparator sued to order elements in the list 
+     */
     public SinglyLinkedList(Comparator<T> comparator) {
     	this();
     	this.comparator = comparator;
     }
     
-    public boolean isEmpty(){ return (start == null); }
+    /**
+     * checks if the list is empty 
+     * @return true if the list is empty and false if not empty 
+     */
+    public boolean isEmpty(){ 
+    	return (start == null); 
+    }
 
-    
+    /**
+     * gets the first node in the singly linked list
+     * @return start the first node in the list 
+     */
     public Node<T> getFirst(){
     	return start;
     }
 
+    /**
+     * removes and returns the first element in the list 
+     * @return data the data of the removed element, null if list is empty
+     */
     public T removeFromStart()
     {
         T data = null;
@@ -48,6 +73,10 @@ public class SinglyLinkedList< T extends Comparable <T> >
         return data;
     }
     
+    /**
+     * shows the number of elements in the list 
+     * @return length the number of elements in the list 
+     */
     public int size(){
         Node<T> curr = start;
         int length = 0;
@@ -61,6 +90,10 @@ public class SinglyLinkedList< T extends Comparable <T> >
         return length;
     }
     
+    /**
+     * adds an element to the end of the list 
+     * @param data the data to add to the end of the list 
+     */
     public void addToEnd(T data) {
         //without the if and else you will get a null pointer 
         //expection when adding the first element.
@@ -78,7 +111,10 @@ public class SinglyLinkedList< T extends Comparable <T> >
             start = nodeToAdd;
     }
     
-    
+    /**
+     * adds an element to the start of the list 
+     * @param data the data to add to the start of the list 
+     */
     public void addToStart(T data) 
     { 
         Node<T> nodeToAdd = new Node<>(data); 
@@ -91,6 +127,11 @@ public class SinglyLinkedList< T extends Comparable <T> >
         }
     }
     
+    /**
+     * adds an element list based on the comparator order 
+     * @param data the data that needs to be added to the list 
+     * @param comparator the comparator used to order elements on the list 
+     */
     private void addInOrder(T data, Comparator<T> comparator) {
         Node<T> newNode = new Node<>(data);
 
