@@ -6,6 +6,8 @@ Judith:
 - Java Docs
 - SinglyLinkedlist class
 - Comparator Classes
+- All group members were able to complete their given tasks on time, they were also able to assist others if they faced any issues completing their parts.
+- we were all able to work through technical errors together to complete this assignment.
 
 Mozes:
 - A2 class
