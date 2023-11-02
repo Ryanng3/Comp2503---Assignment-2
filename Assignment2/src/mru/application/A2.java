@@ -36,11 +36,20 @@ public class A2 {
 	//change this xd
 	String FILE_PATH = "C:\\Users\\mozes\\eclipse-workspace\\A2Beater\\src\\res\\input1.txt";
 	
+	/**
+	 * creates an instance of A2 and runs it
+	 * @param args arguments 
+	 * @throws FileNotFoundException if issue with file handling
+	 */
 	public static void main(String[] args) throws FileNotFoundException {
 		A2 a1 = new A2();
 		a1.run();
 	}
 
+	/**
+	 * runs the program. reads input, loading text files and creating ordered lists 
+	 * @throws FileNotFoundException if issue with file handling
+	 */
 	public void run() throws FileNotFoundException {
 //		readInput();
 		loadTXT(FILE_PATH);
@@ -181,7 +190,12 @@ public class A2 {
 
 
 
-
+	/**
+	 * cleans a word by cleaning apostrophes, converting the word to lowercase, 
+	 * removes all other non-alphabetical words 
+	 * @param next the word to clean and process 
+	 * @return the cleaned and processed word 
+	 */
 	private String cleanWord(String next) {
 		// First, if there is an apostrophe, the substring
 		// before the apostrophe is used and the rest is ignored.
