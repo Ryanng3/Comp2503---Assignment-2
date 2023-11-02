@@ -1,7 +1,6 @@
 package mru.application;
 
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -33,9 +32,6 @@ public class A2 {
 	private SinglyLinkedList<Avenger> mostPopularAvenger = new SinglyLinkedList<Avenger>();
 	private SinglyLinkedList<Avenger> mostPopularPerformer = new SinglyLinkedList<Avenger>();
 	
-	//change this xd
-	String FILE_PATH = "C:\\Users\\mozes\\eclipse-workspace\\A2Beater\\src\\res\\input1.txt";
-	
 	/**
 	 * creates an instance of A2 and runs it
 	 * @param args arguments 
@@ -51,8 +47,8 @@ public class A2 {
 	 * @throws FileNotFoundException if issue with file handling
 	 */
 	public void run() throws FileNotFoundException {
-//		readInput();
-		loadTXT(FILE_PATH);
+		readInput();
+//		loadTXT(FILE_PATH);
 		createdOrderedLists();
 		printResults();
 	}
@@ -62,19 +58,19 @@ public class A2 {
 	 * @param FILE_PATH
 	 * @throws FileNotFoundException
 	 */ 
-	private void loadTXT(String FILE_PATH) throws FileNotFoundException {
-		Scanner input = new Scanner(new File(FILE_PATH));
-		
-		while (input.hasNext()) {
-
-			String word = cleanWord(input.next());
-
-			if (word.length() > 0) {
-				totalwordcount++;
-				updateAvengerList(word);
-			}
-		}
-	}
+//	private void loadTXT(String FILE_PATH) throws FileNotFoundException {
+//		Scanner input = new Scanner(new File(FILE_PATH));
+//		
+//		while (input.hasNext()) {
+//
+//			String word = cleanWord(input.next());
+//
+//			if (word.length() > 0) {
+//				totalwordcount++;
+//				updateAvengerList(word);
+//			}
+//		}
+//	}
 
 	/**
 	 * creates a searcher within the mentionList to then add to the other lists
@@ -94,9 +90,9 @@ public class A2 {
 			Comparator<Avenger> alphabeticalOrder = Comparator.naturalOrder();
 			Comparator<Avenger> popularAvengerOrder = new AvengerComparator();
 			Comparator<Avenger> popularPerformerOrder = new PerformerComparator();
-//			alphabticalList.addToEnd(a, alphabeticalOrder);
-//			mostPopularAvenger.addToEnd(a, popularAvengerOrder);
-//			mostPopularPerformer.addToEnd(a, popularPerformerOrder);
+			alphabticalList.addInOrder(a, alphabeticalOrder);
+			mostPopularAvenger.addInOrder(a, popularAvengerOrder);
+			mostPopularPerformer.addInOrder(a, popularPerformerOrder);
 			
 			current = current.getNext();
 			

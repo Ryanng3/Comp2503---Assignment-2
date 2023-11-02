@@ -132,7 +132,7 @@ public class SinglyLinkedList< T extends Comparable <T> >
      * @param data the data that needs to be added to the list 
      * @param comparator the comparator used to order elements on the list 
      */
-    private void addInOrder(T data, Comparator<T> comparator) {
+    public void addInOrder(T data, Comparator<T> comparator) {
         Node<T> newNode = new Node<>(data);
 
         if (start == null || comparator.compare(data, start.getData()) < 0){
