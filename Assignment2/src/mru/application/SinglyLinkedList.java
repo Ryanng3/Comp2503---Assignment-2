@@ -45,33 +45,6 @@ public class SinglyLinkedList< T extends Comparable <T> >
     	return start;
     }
 
-    /**
-     * removes and returns the first element in the list 
-     * @return data the data of the removed element, null if list is empty
-     */
-    public T removeFromStart()
-    {
-        T data = null;
-
-        if(start != null)
-        {
-            if(start.getNext() == null)
-            {
-                data = start.getData();
-                start = null;
-            }
-            else
-            {
-                Node<T> tmp = start;
-                data = start.getData();
-                start = start.getNext();
-
-                tmp.setNext(null);
-            }
-
-        }
-        return data;
-    }
     
     /**
      * shows the number of elements in the list 
