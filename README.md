@@ -11,6 +11,8 @@ Mozes:
 - A2 class
 - Java docs
 - SinglyLinkedListClass
+- The group was able to finish everything with little to no worry and even if there was any we were able to help each other when needed
+- Overall the group's teamwork was amazing.
 
 Ryan:
 - SinglyLinkedList class
