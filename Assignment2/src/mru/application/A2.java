@@ -1,7 +1,6 @@
 package mru.application;
 
 
-import java.io.FileNotFoundException;
 import java.util.Comparator;
 import java.util.Scanner;
 
@@ -37,7 +36,7 @@ public class A2 {
 	 * @param args arguments 
 	 * @throws FileNotFoundException if issue with file handling
 	 */
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) {
 		A2 a1 = new A2();
 		a1.run();
 	}
@@ -46,9 +45,8 @@ public class A2 {
 	 * runs the program. reads input, loading text files and creating ordered lists 
 	 * @throws FileNotFoundException if issue with file handling
 	 */
-	public void run() throws FileNotFoundException {
+	public void run() {
 		readInput();
-//		loadTXT(FILE_PATH);
 		createdOrderedLists();
 		printResults();
 	}
@@ -58,19 +56,6 @@ public class A2 {
 	 * @param FILE_PATH
 	 * @throws FileNotFoundException
 	 */ 
-//	private void loadTXT(String FILE_PATH) throws FileNotFoundException {
-//		Scanner input = new Scanner(new File(FILE_PATH));
-//		
-//		while (input.hasNext()) {
-//
-//			String word = cleanWord(input.next());
-//
-//			if (word.length() > 0) {
-//				totalwordcount++;
-//				updateAvengerList(word);
-//			}
-//		}
-//	}
 
 	/**
 	 * creates a searcher within the mentionList to then add to the other lists
